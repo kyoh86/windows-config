@@ -1,6 +1,6 @@
 local wezterm = require("wezterm")
 return {
-  font = wezterm.font("PlemolJP Console NF"),
+  font = wezterm.font_with_fallback({ "PlemolJP Console", "Symbols NF 1000-em" }),
   default_prog = { "wsl.exe", "--distribution", "Ubuntu", "--cd", "~", "--exec", "/bin/zsh", "-l", "-c", "nvim" },
   color_scheme = "momiji",
   window_padding = {
