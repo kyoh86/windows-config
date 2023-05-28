@@ -45,7 +45,7 @@ local function build_domains()
   end
 
   table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" } }))
-  table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Neovim-test", default_prog = { "/bin/zsh", "-l", "-c", "NVIM_APPNAME=nvim-test nvim" } }))
+  table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Neovim-test", default_prog = { "/bin/zsh", "-l", "-c", "NVIM_APPNAME=nvim-test nvim" }, default_cwd = "~/Projects/github.com/kyoh86/dotfiles" }))
 
   return { wsl_domains = wsl_domains, default_domain = "WSL:Neovim" }
 end
@@ -56,7 +56,9 @@ return tbl_merge(build_domains(), {
   hide_tab_bar_if_only_one_tab = true,
   window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
   keys = {
-    { key = "p", mods = "ALT", action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|DOMAINS" }) },
+    { key = "l", mods = "ALT", action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|DOMAINS" }) },
+    { key = "p", mods = "ALT", action = wezterm.action.ActivateCommandPalette },
+    { key = "t", mods = "SHIFT|ALT", action = wezterm.action.SpawnCommandInNewWindow({ label = "Start new nvim-test", args = {}, domain = { DomainName = "WSL:Neovim-test" } }) },
   },
   front_end = "WebGpu",
   adjust_window_size_when_changing_font_size = false,
