@@ -52,6 +52,8 @@ local function build_domains()
 end
 
 return tbl_merge(build_domains(), {
+  initial_cols = 120,
+  initial_rows = 36,
   font = wezterm.font_with_fallback({ "PlemolJP Console NF" }),
   color_scheme = "momiji",
   hide_tab_bar_if_only_one_tab = true,
