@@ -44,9 +44,9 @@ local function build_domains()
     return {}
   end
 
-  table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" } }))
+  table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" }, default_cwd = "~" }))
   table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Neovim-test", default_prog = { "/bin/zsh", "-l", "-c", "NVIM_APPNAME=nvim-test nvim" }, default_cwd = "~/Projects/github.com/kyoh86/dotfiles" }))
-  table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Vim", default_prog = { "/bin/zsh", "-l", "-c", "vim" } }))
+  table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Vim", default_prog = { "/bin/zsh", "-l", "-c", "vim" }, default_cwd = "~" }))
 
   return { wsl_domains = wsl_domains, default_domain = "WSL:Neovim" }
 end
