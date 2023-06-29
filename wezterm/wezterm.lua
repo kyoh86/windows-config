@@ -2,10 +2,9 @@ local wezterm = require("wezterm")
 
 ---@class Named
 ---@field name string
-local _ = nil
+
 ---@class WSLDomain : Named
 ---@field distribution string
-local _ = nil
 
 --- Merge two tables
 ---@generic T : table
@@ -40,13 +39,18 @@ local function build_domains()
   local wsl_domains = wezterm.default_wsl_domains()
 
   local ubuntu = find_name("WSL:Ubuntu", wsl_domains)
-  if ubuntu == nil then
-    return {}
+  if ubuntu ~= nil then
+    table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" }, default_cwd = "~" }))
+    table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Neovim-test", default_prog = { "/bin/zsh", "-l", "-c", "NVIM_APPNAME=nvim-test nvim" }, default_cwd = "~/Projects/github.com/kyoh86/dotfiles" }))
+    table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Vim", default_prog = { "/bin/zsh", "-l", "-c", "vim" }, default_cwd = "~" }))
   end
 
-  table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" }, default_cwd = "~" }))
-  table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Neovim-test", default_prog = { "/bin/zsh", "-l", "-c", "NVIM_APPNAME=nvim-test nvim" }, default_cwd = "~/Projects/github.com/kyoh86/dotfiles" }))
-  table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Vim", default_prog = { "/bin/zsh", "-l", "-c", "vim" }, default_cwd = "~" }))
+  local arch = find_name("WSL:ArchLinux", wsl_domains)
+  if arch ~= nil then
+    table.insert(wsl_domains, tbl_merge(arch, { name = "WSL:Arch:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" }, default_cwd = "~" }))
+    table.insert(wsl_domains, tbl_merge(arch, { name = "WSL:Arch:Neovim-test", default_prog = { "/bin/zsh", "-l", "-c", "NVIM_APPNAME=nvim-test nvim" }, default_cwd = "~/Projects/github.com/kyoh86/dotfiles" }))
+    table.insert(wsl_domains, tbl_merge(arch, { name = "WSL:Arch:Vim", default_prog = { "/bin/zsh", "-l", "-c", "vim" }, default_cwd = "~" }))
+  end
 
   return { wsl_domains = wsl_domains, default_domain = "WSL:Neovim" }
 end
@@ -54,7 +58,7 @@ end
 return tbl_merge(build_domains(), {
   initial_cols = 120,
   initial_rows = 36,
-  font = wezterm.font_with_fallback({ "PlemolJP Console NF" }),
+  font = wezterm.font("PlemolJP Console NF"),
   color_scheme = "momiji",
   hide_tab_bar_if_only_one_tab = true,
   window_padding = { left = 0, right = 0, top = 0, bottom = 0 },

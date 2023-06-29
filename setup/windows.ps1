@@ -23,7 +23,7 @@ winget install Xmind.Xmind
 winget install inkdrop
 winget install wez.wezterm
 winget upgrade --all
-Set-content -Path ~/wslconfig -Value "[wsl2]","localhostForwarding = true","memory = 16GB","[interop]","appendWindowsPath = false"
+Set-content -Path ~/wslconfig -Value "[wsl2]","localhostForwarding = true","memory = 16GB","","[interop]","appendWindowsPath = true"
 
 # Import .config/WindowsTerminal/settings.json
 
