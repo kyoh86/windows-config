@@ -52,7 +52,7 @@ local function build_domains()
     table.insert(wsl_domains, tbl_merge(arch, { name = "WSL:Arch:Vim", default_prog = { "/bin/zsh", "-l", "-c", "vim" }, default_cwd = "~" }))
   end
 
-  return { wsl_domains = wsl_domains, default_domain = "WSL:Neovim" }
+  return { wsl_domains = wsl_domains, default_domain = "WSL:Arch:Neovim" }
 end
 
 return tbl_merge(build_domains(), {
