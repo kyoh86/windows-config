@@ -38,21 +38,18 @@ local function build_domains()
   ---@type WSLDomain[]
   local wsl_domains = wezterm.default_wsl_domains()
 
-  local ubuntu = find_name("WSL:Ubuntu", wsl_domains)
-  if ubuntu ~= nil then
-    table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" }, default_cwd = "~" }))
-    table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Neovim-test", default_prog = { "/bin/zsh", "-l", "-c", "NVIM_APPNAME=nvim-test nvim" }, default_cwd = "~/Projects/github.com/kyoh86/dotfiles" }))
-    table.insert(wsl_domains, tbl_merge(ubuntu, { name = "WSL:Vim", default_prog = { "/bin/zsh", "-l", "-c", "vim" }, default_cwd = "~" }))
-  end
-
   local arch = find_name("WSL:ArchLinux", wsl_domains)
   if arch ~= nil then
-    table.insert(wsl_domains, tbl_merge(arch, { name = "WSL:Arch:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" }, default_cwd = "~" }))
-    table.insert(wsl_domains, tbl_merge(arch, { name = "WSL:Arch:Neovim-test", default_prog = { "/bin/zsh", "-l", "-c", "NVIM_APPNAME=nvim-test nvim" }, default_cwd = "~/Projects/github.com/kyoh86/dotfiles" }))
-    table.insert(wsl_domains, tbl_merge(arch, { name = "WSL:Arch:Vim", default_prog = { "/bin/zsh", "-l", "-c", "vim" }, default_cwd = "~" }))
+    table.insert(wsl_domains, 1, tbl_merge(arch, { name = "WSL:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" }, default_cwd = "~" }))
+    table.insert(wsl_domains, tbl_merge(arch, { name = "WSL:Vim", default_prog = { "/bin/zsh", "-l", "-c", "vim" }, default_cwd = "~" }))
   end
 
-  return { wsl_domains = wsl_domains, default_domain = "WSL:Arch:Neovim" }
+  return {
+    unix_domains = {},
+    ssh_domains = {},
+    wsl_domains = wsl_domains,
+    default_domain = "WSL:Neovim",
+  }
 end
 
 return tbl_merge(build_domains(), {
