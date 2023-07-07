@@ -58,6 +58,7 @@ return tbl_merge(build_domains(), {
   font = wezterm.font("PlemolJP Console NF"),
   color_scheme = "momiji",
   hide_tab_bar_if_only_one_tab = true,
+  disable_default_mouse_bindings = true,
   window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
   keys = {
     { key = "n", mods = "ALT", action = wezterm.action.SpawnWindow },
