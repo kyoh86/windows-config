@@ -52,6 +52,10 @@ local function build_domains()
   }
 end
 
+wezterm.on("open-new-window", function(window, pane)
+  wezterm.mux.spawn_window({ domain = { DomainName = pane:get_domain_name() } })
+end)
+
 return tbl_merge(build_domains(), {
   initial_cols = 120,
   initial_rows = 36,
@@ -61,7 +65,7 @@ return tbl_merge(build_domains(), {
   disable_default_mouse_bindings = true,
   window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
   keys = {
-    { key = "n", mods = "ALT", action = wezterm.action.SpawnWindow },
+    { key = "n", mods = "ALT", action = wezterm.action.EmitEvent("open-new-window") },
     { key = "l", mods = "ALT", action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|DOMAINS" }) },
     { key = "p", mods = "ALT", action = wezterm.action.ActivateCommandPalette },
     { key = "t", mods = "SHIFT|ALT", action = wezterm.action.SpawnCommandInNewWindow({ label = "Start new nvim-test", args = {}, domain = { DomainName = "WSL:Neovim-test" } }) },
