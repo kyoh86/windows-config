@@ -68,7 +68,7 @@ return tbl_merge(build_domains(), {
     { key = "n", mods = "ALT", action = wezterm.action.EmitEvent("open-new-window") },
     { key = "l", mods = "ALT", action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|DOMAINS" }) },
     { key = "p", mods = "ALT", action = wezterm.action.ActivateCommandPalette },
-    { key = "t", mods = "SHIFT|ALT", action = wezterm.action.SpawnCommandInNewWindow({ label = "Start new nvim-test", args = {}, domain = { DomainName = "WSL:Neovim-test" } }) },
+    { key = "x", mods = "SHIFT|ALT", action = wezterm.action.SpawnCommandInNewWindow({ label = "Start new ArchLinux Window", args = {}, domain = { DomainName = "WSL:ArchLinux" } }) },
   },
   front_end = "WebGpu",
   adjust_window_size_when_changing_font_size = false,
