@@ -40,15 +40,21 @@ local function build_domains()
 
   local arch = find_name("WSL:ArchLinux", wsl_domains)
   if arch ~= nil then
-    table.insert(wsl_domains, 1, tbl_merge(arch, { name = "WSL:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" }, default_cwd = "~" }))
-    table.insert(wsl_domains, tbl_merge(arch, { name = "WSL:Vim", default_prog = { "/bin/zsh", "-l", "-c", "vim" }, default_cwd = "~" }))
+    table.insert(wsl_domains, 1, tbl_merge(arch, { name = "WSL:ArchLinux:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" }, default_cwd = "~" }))
+    table.insert(wsl_domains, tbl_merge(arch, { name = "WSL:ArchLinux:Vim", default_prog = { "/bin/zsh", "-l", "-c", "vim" }, default_cwd = "~" }))
+  end
+
+  local arch = find_name("WSL:Ubuntu-24.04", wsl_domains)
+  if arch ~= nil then
+    table.insert(wsl_domains, 1, tbl_merge(arch, { name = "WSL:Ubuntu-24.04:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" }, default_cwd = "~" }))
+    table.insert(wsl_domains, tbl_merge(arch, { name = "WSL:Ubuntu-24.04:Vim", default_prog = { "/bin/zsh", "-l", "-c", "vim" }, default_cwd = "~" }))
   end
 
   return {
     unix_domains = {},
     ssh_domains = {},
     wsl_domains = wsl_domains,
-    default_domain = "WSL:Neovim",
+    default_domain = "WSL:Ubuntu-24.04:Neovim",
   }
 end
 
