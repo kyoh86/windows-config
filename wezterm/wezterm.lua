@@ -40,21 +40,19 @@ local function build_domains()
 
   local arch = find_name("WSL:ArchLinux", wsl_domains)
   if arch ~= nil then
-    table.insert(wsl_domains, 1, tbl_merge(arch, { name = "WSL:ArchLinux:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" }, default_cwd = "~" }))
-    table.insert(wsl_domains, tbl_merge(arch, { name = "WSL:ArchLinux:Vim", default_prog = { "/bin/zsh", "-l", "-c", "vim" }, default_cwd = "~" }))
+    table.insert(wsl_domains, 1, tbl_merge(arch, { name = "WSL:Arch:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" }, default_cwd = "~" }))
   end
 
-  local arch = find_name("WSL:Ubuntu-24.04", wsl_domains)
-  if arch ~= nil then
-    table.insert(wsl_domains, 1, tbl_merge(arch, { name = "WSL:Ubuntu-24.04:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" }, default_cwd = "~" }))
-    table.insert(wsl_domains, tbl_merge(arch, { name = "WSL:Ubuntu-24.04:Vim", default_prog = { "/bin/zsh", "-l", "-c", "vim" }, default_cwd = "~" }))
+  local ubuntu = find_name("WSL:Ubuntu-24.04", wsl_domains)
+  if ubuntu ~= nil then
+    table.insert(wsl_domains, 1, tbl_merge(ubuntu, { name = "WSL:Ubuntu:Neovim", default_prog = { "/bin/zsh", "-l", "-c", "nvim" }, default_cwd = "~" }))
   end
 
   return {
     unix_domains = {},
     ssh_domains = {},
     wsl_domains = wsl_domains,
-    default_domain = "WSL:Ubuntu-24.04:Neovim",
+    default_domain = "WSL:Ubuntu:Neovim",
   }
 end
 
@@ -65,7 +63,7 @@ end)
 return tbl_merge(build_domains(), {
   initial_cols = 120,
   initial_rows = 36,
-  font = wezterm.font_with_fallback({ "PlemolJP Console", "Symbols Nerd Font Mono" }),
+  font = wezterm.font_with_fallback({ "PlemolJP Console HS", "Symbols Nerd Font Mono" }),
   color_scheme = "momiji",
   hide_tab_bar_if_only_one_tab = true,
   disable_default_mouse_bindings = true,
@@ -75,6 +73,14 @@ return tbl_merge(build_domains(), {
     { key = "l", mods = "ALT", action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|DOMAINS" }) },
     { key = "p", mods = "ALT", action = wezterm.action.ActivateCommandPalette },
     { key = "x", mods = "SHIFT|ALT", action = wezterm.action.SpawnCommandInNewWindow({ label = "Start new ArchLinux Window", args = {}, domain = { DomainName = "WSL:ArchLinux" } }) },
+    { key = "u", mods = "SHIFT|ALT", action = wezterm.action.SpawnCommandInNewWindow({ label = "Start new Ubuntu Window", args = {}, domain = { DomainName = "WSL:Ubuntu" } }) },
+  },
+  mouse_bindings = {
+    {
+      event = { Down = { streak = 1, button = "Right" } },
+      mods = "NONE",
+      action = wezterm.action.PasteFrom("Clipboard"),
+    },
   },
   front_end = "WebGpu",
   adjust_window_size_when_changing_font_size = false,
