@@ -73,7 +73,7 @@ return tbl_merge(build_domains(), {
     { key = "l", mods = "ALT", action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|DOMAINS" }) },
     { key = "p", mods = "ALT", action = wezterm.action.ActivateCommandPalette },
     { key = "x", mods = "SHIFT|ALT", action = wezterm.action.SpawnCommandInNewWindow({ label = "Start new ArchLinux Window", args = {}, domain = { DomainName = "WSL:ArchLinux" } }) },
-    { key = "u", mods = "SHIFT|ALT", action = wezterm.action.SpawnCommandInNewWindow({ label = "Start new Ubuntu Window", args = {}, domain = { DomainName = "WSL:Ubuntu" } }) },
+    { key = "u", mods = "SHIFT|ALT", action = wezterm.action.SpawnCommandInNewWindow({ label = "Start new Ubuntu Window", args = {}, domain = { DomainName = "WSL:Ubuntu-24.04" } }) },
   },
   mouse_bindings = {
     {
