@@ -1,0 +1,9 @@
+- PowerToys Run
+    - システムコマンドプラグインで日本語ではなく英語を使うように設定
+        - https://gyazo.com/0d2a81fcb2df49eede55e140a381720b
+        - Shutdownとか
+- FancyZones
+    - Windowsスナップのオーバーライドを有効化
+        - https://gyazo.com/3f79533d16afc3998d18535a8129682a
+    - レイアウトエディタで良い感じに
+        - https://gyazo.com/6c44e7079b4774e9384711f789857281

@@ -69,12 +69,16 @@ $ winget install --id=equalsraf.win32yank -e
 - タスクバーの整理
 - コントロールパネル > キーボード で入力速度の調整
 - このリポジトリを `C:\Users\kyoh86\.config` にCloneする
+- PowerToysの設定
+    - 詳細はpower-toys-config.md
 
 ### 4. WSL Setup
 
 ```console
 $ wsl --install --distribution="Ubuntu-24.04"
 ```
+
+https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config#wslconfig
 
 ### 5. その他のツールのインストール
 
